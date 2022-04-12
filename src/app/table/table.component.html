@@ -1,15 +1,41 @@
 <p id="timePeriod"></p>
 <app-filter></app-filter>
-<table class="table" id="table">
-    <thead id="table-head">
-      <tr id="table-head-row">
-        <th scope="col">Province</th>
-        <th scope="col">New Cases</th>
-        <th scope="col">New Deaths</th>
-        <th scope="col">New Recovered</th>
-      </tr>
-    </thead>
-    <tbody id="table-body">
-      
-    </tbody>
+<div style="padding: 0 50px;">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" matSort (matSortChange)="announceSortChange($event)">
+    <ng-container matColumnDef="province">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+        Province
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.province}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cases">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+        New Cases
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.cases}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="deaths">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+        New Deaths
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.deaths}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="recovered">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+        New Recovered
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.recovered}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
